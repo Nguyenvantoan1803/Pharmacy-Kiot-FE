@@ -1,5 +1,5 @@
 {
-  "input": "http://localhost:7763/swagger/v1/swagger.json",
+  "input": "http://localhost:61447/swagger/v1/swagger.json",
   "output": "./src/app/api", 
   "httpClient": "HttpClient",
   "modelPropertyNaming": "camelCase",

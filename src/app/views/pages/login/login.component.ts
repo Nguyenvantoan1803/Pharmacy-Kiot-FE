@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LoginService } from "../../../api/services";
-import { ApiLoginLoginPost$Params } from "../../../api/fn/login/api-login-login-post";
+import { LoginRequest } from "../../../api/models/login-request";
 // import { cilEye } from '@coreui/icons';
 @Component({
     selector: 'app-login',
@@ -52,16 +52,19 @@ export class LoginComponent {
           username: username,
           password : password
         }
-      } as ApiLoginLoginPost$Params
-     
-      this._loginService.apiLoginLoginPost$Response(params).subscribe(
-        (response) => {
+      }  
+
+      this._loginService.apiLoginLoginPost$Response(params).subscribe({
+        next: (response) => {
           console.log('Login success:', response);
         },
-        (error) => {
+        error: (error) => {
           console.error('Login error:', error);
+        },
+        complete: () => {
+          console.log('Login request complete.');
         }
-      );
+      });
       console.log('Đăng nhập thành công:', username, password);
       // this.router.navigate(['/dashboard']).then(success => {
       //   console.log('Điều hướng thành công?', success);
