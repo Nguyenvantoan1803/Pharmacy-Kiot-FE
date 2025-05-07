@@ -1,0 +1,15 @@
+{
+  "input": "http://localhost:7763/swagger/v1/swagger.json",
+  "output": "./src/app/api", 
+  "httpClient": "HttpClient",
+  "modelPropertyNaming": "camelCase",
+  "path": "src/app/api",  
+  "service": {
+    "apis": true,
+    "models": true
+  },
+  "generate": {
+    "api": true,
+    "model": true
+  }
+}
