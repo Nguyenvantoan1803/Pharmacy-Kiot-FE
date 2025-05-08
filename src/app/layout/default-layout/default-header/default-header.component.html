@@ -24,6 +24,13 @@
     </c-header-nav>
 
     <c-header-nav class="d-none d-md-flex ms-auto ">
+      <a cNavLink (click)="showLangDropdown = !showLangDropdown">
+        <svg cIcon class="my-1" name="cilLanguage" size="lg"></svg>
+      </a>
+      <div *ngIf="showLangDropdown" class="dropdown-menu show">
+        <a class="dropdown-item" (click)="switchLanguage('vi')">Tiếng Việt</a>
+        <a class="dropdown-item" (click)="switchLanguage('en')">English</a>
+      </div>
       <a cNavLink>
         <svg cIcon class="my-1" name="cilBell" size="lg"></svg>
       </a>

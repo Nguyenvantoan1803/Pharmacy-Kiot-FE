@@ -12,7 +12,18 @@ import {
 import { DropdownModule, SidebarModule } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { routes } from './app.routes';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi ,HttpClient} from '@angular/common/http';
+import {
+  provideTranslateService,
+  TranslateLoader,
+  TranslateStore,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
+  http: HttpClient
+) => new TranslateHttpLoader(http, './public/i18n', '.json');
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes,
@@ -30,6 +41,18 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptorsFromDi())
+    provideHttpClient(withInterceptorsFromDi()),
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(appRoutes),
+    provideHttpClient(),
+    provideTranslateService({
+      defaultLanguage: 'es',
+      useDefaultLang: true,
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
   ]
 };

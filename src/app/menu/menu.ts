@@ -12,21 +12,52 @@ export const navItems: INavData[] = [
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Thanh Toán'
   },
   {
-    name: 'Colors',
+    name: 'Thu Ngân',
+    url: '/theme/colors',
+    iconComponent: { name: 'cil-cash' }
+  },
+  {
+    name: 'Lịch sử đơn hàng',
+    url: '/theme/typography',
+    linkProps: { fragment: 'headings' },
+    iconComponent: { name: 'cil-History' }
+  },
+  {
+    title: true,
+    name: 'Quản lý sản phẩm'
+  },
+  {
+    name: 'Nhập hàng',
     url: '/theme/colors',
     iconComponent: { name: 'cil-drop' }
   },
   {
-    name: 'Typography',
+    name: 'Tồn kho',
     url: '/theme/typography',
     linkProps: { fragment: 'headings' },
     iconComponent: { name: 'cil-pencil' }
   },
   {
     name: 'Đăng ký tiêu chuẩn',
+    title: true
+  },
+  {
+    name: 'Loại sản phẩm',
+    url: '/base',
+    iconComponent: { name: 'cil-puzzle' },
+    children: [
+      {
+        name: 'Tooltips',
+        url: '/base/tooltips',
+        icon: 'nav-icon-bullet'
+      }
+    ]
+  },
+  {
+    name: 'Thống Kê -Báo Cáo',
     title: true
   },
   {
@@ -46,10 +77,36 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-chart-pie' },
     url: '/charts'
   },
-
   {
     title: true,
-    name: 'Extras'
+    name: 'Đăng ký người dùng'
+  },
+  {
+    name: 'Đăng ký Khách Hàng',
+    url: '/theme/colors',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    name: 'Đăng ký Nhà Cung Cấp',
+    url: '/theme/colors',
+    iconComponent: { name: 'cil-drop' }
+  },
+  {
+    name: 'Đăng ký Tài Khoản',
+    url: '/login',
+    iconComponent: { name: 'cil-star' },
+    children: [
+      {
+        name: 'Tài Khoản',
+        url: '/login',
+        icon: 'nav-icon-bullet'
+      },
+      {
+        name: 'Phân Quyền',
+        url: '/register',
+        icon: 'nav-icon-bullet'
+      },
+    ]
   },
   {
     name: 'Pages',

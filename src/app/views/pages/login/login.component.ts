@@ -66,10 +66,10 @@ export class LoginComponent {
         }
       });
       console.log('Đăng nhập thành công:', username, password);
-      // this.router.navigate(['/dashboard']).then(success => {
-      //   console.log('Điều hướng thành công?', success);
-      //   this.isLoginSuccess = true;
-      // });
+      this.router.navigate(['/dashboard']).then(success => {
+        console.log('Điều hướng thành công?', success);
+        this.isLoginSuccess = true;
+      });
     } else {
       console.log('Vui lòng nhập Username và Password!');
     }

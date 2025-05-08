@@ -1,7 +1,7 @@
 import { NgTemplateOutlet } from '@angular/common';
 import { Component, computed, inject, input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-
+import { CommonModule } from '@angular/common';
 import {
   AvatarComponent,
   BadgeComponent,
@@ -21,13 +21,13 @@ import {
   NavLinkDirective,
   SidebarToggleDirective
 } from '@coreui/angular';
-
 import { IconDirective } from '@coreui/icons-angular';
-
+import { TranslateModule,TranslateService } from '@ngx-translate/core';
 @Component({
+    standalone: true,
     selector: 'app-default-header',
     templateUrl: './default-header.component.html',
-  imports: [ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective]
+  imports: [CommonModule,TranslateModule,ContainerComponent, HeaderTogglerDirective, SidebarToggleDirective, IconDirective, HeaderNavComponent, NavItemComponent, NavLinkDirective, RouterLink, RouterLinkActive, NgTemplateOutlet, BreadcrumbRouterComponent, DropdownComponent, DropdownToggleDirective, AvatarComponent, DropdownMenuDirective, DropdownHeaderDirective, DropdownItemDirective, BadgeComponent, DropdownDividerDirective]
 })
 export class DefaultHeaderComponent extends HeaderComponent {
 
@@ -45,12 +45,17 @@ export class DefaultHeaderComponent extends HeaderComponent {
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
 
-  constructor() {
+  constructor(private translate: TranslateService) {
+    translate.setDefaultLang('en');
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang && browserLang.match(/en|vi/) ? browserLang : 'vi');
     super();
   }
-
+  showLangDropdown = false;
   sidebarId = input('sidebar1');
-
+  switchLanguage(lang: string) {
+    this.translate.use(lang);
+  }
   public newMessages = [
     {
       id: 0,
@@ -62,46 +67,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
       link: 'apps/email/inbox/message',
       message: 'Attention team, we\'ll be conducting critical system maintenance tonight from 10 PM to 2 AM. Plan accordingly...'
     },
-    {
-      id: 1,
-      from: 'Richard Johnson',
-      avatar: '6.jpg',
-      status: 'warning',
-      title: 'Project Update: Milestone Achieved',
-      time: '5 minutes ago',
-      link: 'apps/email/inbox/message',
-      message: 'Kudos on hitting sales targets last quarter! Let\'s keep the momentum. New goals, new victories ahead...'
-    },
-    {
-      id: 2,
-      from: 'Angela Rodriguez',
-      avatar: '5.jpg',
-      status: 'danger',
-      title: 'Social Media Campaign Launch',
-      time: '1:52 PM',
-      link: 'apps/email/inbox/message',
-      message: 'Exciting news! Our new social media campaign goes live tomorrow. Brace yourselves for engagement...'
-    },
-    {
-      id: 3,
-      from: 'Jane Lewis',
-      avatar: '4.jpg',
-      status: 'info',
-      title: 'Inventory Checkpoint',
-      time: '4:03 AM',
-      link: 'apps/email/inbox/message',
-      message: 'Team, it\'s time for our monthly inventory check. Accurate counts ensure smooth operations. Let\'s nail it...'
-    },
-    {
-      id: 3,
-      from: 'Ryan Miller',
-      avatar: '4.jpg',
-      status: 'info',
-      title: 'Customer Feedback Results',
-      time: '3 days ago',
-      link: 'apps/email/inbox/message',
-      message: 'Our latest customer feedback is in. Let\'s analyze and discuss improvements for an even better service...'
-    }
+   
   ];
 
   public newNotifications = [

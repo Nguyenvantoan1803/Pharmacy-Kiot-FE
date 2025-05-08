@@ -3,15 +3,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { delay, filter, map, tap } from 'rxjs/operators';
-
+import {  HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ColorModeService } from '@coreui/angular';
 import { IconSetService } from '@coreui/icons-angular';
 import { iconSubset } from './icons/icon-subset';
-
 @Component({
     selector: 'app-root',
     template: '<router-outlet />',
-    imports: [RouterOutlet]
+    imports: [RouterOutlet, TranslateModule],
+    providers: [TranslateService]
 })
 export class AppComponent implements OnInit {
   title = 'Pharmacy-Kiot';
@@ -30,8 +32,9 @@ export class AppComponent implements OnInit {
     this.#iconSetService.icons = { ...iconSubset };
     this.#colorModeService.localStorageItemName.set('coreui-free-angular-admin-template-theme-default');
     this.#colorModeService.eventName.set('ColorSchemeChange');
+  
+ 
   }
-
   ngOnInit(): void {
 
     this.#router.events.pipe(
@@ -54,4 +57,7 @@ export class AppComponent implements OnInit {
       )
       .subscribe();
   }
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
