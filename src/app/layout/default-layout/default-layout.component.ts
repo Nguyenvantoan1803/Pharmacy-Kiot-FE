@@ -16,7 +16,7 @@ import {
 } from '@coreui/angular';
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
-import { navItems } from '../../menu/menu';
+import { navItems } from '../../../assets/menu/menu';
 
 function isOverflown(element: HTMLElement) {
   return (

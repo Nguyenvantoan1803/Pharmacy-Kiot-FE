@@ -22,7 +22,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const httpLoaderFactory: (http: HttpClient) => TranslateHttpLoader = (
   http: HttpClient
-) => new TranslateHttpLoader(http, './public/i18n', '.json');
+) => new TranslateHttpLoader(http, './assets/menu/language/', '.json');
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,11 +42,11 @@ export const appConfig: ApplicationConfig = {
     IconSetService,
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(appRoutes),
+    // provideZoneChangeDetection({ eventCoalescing: true }),
+    // provideRouter(appRoutes),
     provideHttpClient(),
     provideTranslateService({
-      defaultLanguage: 'es',
+      defaultLanguage: 'en',
       useDefaultLang: true,
       loader: {
         provide: TranslateLoader,

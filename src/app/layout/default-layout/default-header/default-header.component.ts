@@ -54,6 +54,8 @@ export class DefaultHeaderComponent extends HeaderComponent {
   showLangDropdown = false;
   sidebarId = input('sidebar1');
   switchLanguage(lang: string) {
+    console.log('121212');
+    this.showLangDropdown = false;
     this.translate.use(lang);
   }
   public newMessages = [
