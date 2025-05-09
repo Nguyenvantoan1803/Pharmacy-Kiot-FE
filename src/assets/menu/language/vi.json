@@ -1,4 +1,13 @@
 {
-    "HELLO": "Xin chào",
-    "LANGUAGE": "Ngôn ngữ"
+    "LOGIN": {
+    "LOGIN": "Đăng nhập",
+    "SIGN_IN_YOUR_ACCOUNT": "Đăng nhập vào tài khoản của bạn",
+    "REQUIRED_USERNAME": "Vui lòng nhập tên đăng nhập",
+    "REQUIRED_PASSWORD" :"Vui lòng nhập mật khẩu"
+  },
+   "STANDARD":{
+    "STANDARDINFORMATION":"Thông tin tiêu chuẩn",
+    "SYSTEMMANAGEMENT":"Quản lý hệ thống",
+    "REGISTERUSER":"Đăng ký người dùng"
+   }
   }

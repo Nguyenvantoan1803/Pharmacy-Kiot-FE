@@ -33,7 +33,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
 
   readonly #colorModeService = inject(ColorModeService);
   readonly colorMode = this.#colorModeService.colorMode;
-
+  currentLanguage: string = 'vi';
   readonly colorModes = [
     { name: 'light', text: 'Light', icon: 'cilSun' },
     { name: 'dark', text: 'Dark', icon: 'cilMoon' },
@@ -54,7 +54,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
   showLangDropdown = false;
   sidebarId = input('sidebar1');
   switchLanguage(lang: string) {
-    console.log('121212');
+    this.currentLanguage = lang;
     this.showLangDropdown = false;
     this.translate.use(lang);
   }

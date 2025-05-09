@@ -15,15 +15,20 @@ export const navItems: INavData[] = [
     name: 'Thanh Toán'
   },
   {
-    name: 'Thu Ngân',
-    url: '/theme/colors',
-    iconComponent: { name: 'cil-cash' }
-  },
-  {
-    name: 'Lịch sử đơn hàng',
-    url: '/theme/typography',
-    linkProps: { fragment: 'headings' },
-    iconComponent: { name: 'cil-History' }
+    name: 'Thanh Toán',
+    iconComponent: { name: 'cilWallet' }, // icon tùy chọn
+    children: [
+      {
+        name: 'Thu Ngân',
+        url: '/theme/colors',
+        iconComponent: { name: 'cil-cash' }
+      },
+      {
+        name: 'Lịch sử đơn hàng',
+        url: '/theme/typography',
+        iconComponent: { name: 'cil-history' }
+      }
+    ]
   },
   {
     title: true,
@@ -92,12 +97,12 @@ export const navItems: INavData[] = [
     iconComponent: { name: 'cil-drop' }
   },
   {
-    name: 'Đăng ký Tài Khoản',
+    translate: 'STANDARD.REGISTERUSER',
     url: '/login',
     iconComponent: { name: 'cil-star' },
     children: [
       {
-        name: 'Tài Khoản',
+        translate: 'STANDARD.REGISTERUSER',
         url: '/login',
         icon: 'nav-icon-bullet'
       },

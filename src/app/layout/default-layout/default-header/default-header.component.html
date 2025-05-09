@@ -23,14 +23,13 @@
       </c-nav-item>
     </c-header-nav>
 
-    <c-header-nav class="d-none d-md-flex ms-auto ">
+    <c-header-nav class="d-flex justify-content-center align-items-center ms-auto ">
       <a cNavLink (click)="showLangDropdown = !showLangDropdown">
-        <svg cIcon class="my-1" name="cilLanguage" size="lg"></svg>
+        <ng-container *ngTemplateOutlet="langDropdown" />
       </a>
-      <div *ngIf="showLangDropdown" class="dropdown-menu show">
-        <a class="dropdown-item" (click)="switchLanguage('vi')">  <img src="../../../../assets/images/vietnam-flag-icon.png" width="20" class="me-2" alt="Vietnam Flag" />Tiếng Việt</a>
-        <a class="dropdown-item" (click)="switchLanguage('en')"> <img src="../../../../assets/images/united-states-flag-icon.png" width="20" class="me-2" alt="Vietnam Flag" />English</a>
-      </div>
+      <!-- <div *ngIf="showLangDropdown" class="dropdown-menu show">
+        <ng-container *ngTemplateOutlet="langDropdown" />
+      </div> -->
       <a cNavLink>
         <svg cIcon class="my-1" name="cilBell" size="lg"></svg>
       </a>
@@ -183,6 +182,25 @@
           {{ mode.text }}
         </button>
       }
+    </div>
+  </c-dropdown>
+</ng-template>
+
+<ng-template #langDropdown>
+  <c-dropdown alignment="end" variant="nav-item">
+    <button [caret]="false" cDropdownToggle aria-label="Open language picker">
+      <img *ngIf="currentLanguage === 'vi'" src="../../../../assets/images/vietnam-flag-icon.png" width="20" class="me-2" alt="Vietnam Flag" />
+      <img *ngIf="currentLanguage === 'en'" src="../../../../assets/images/united-states-flag-icon.png" width="20" class="me-2" alt="United States Flag" />
+    </button>
+    <div cDropdownMenu>
+      <a class="dropdown-item" (click)="switchLanguage('vi')">
+        <img src="../../../../assets/images/vietnam-flag-icon.png" width="20" class="me-2" alt="Vietnam Flag" />
+        Tiếng Việt
+      </a>
+      <a class="dropdown-item" (click)="switchLanguage('en')">
+        <img src="../../../../assets/images/united-states-flag-icon.png" width="20" class="me-2" alt="United States Flag" />
+        English
+      </a>
     </div>
   </c-dropdown>
 </ng-template>

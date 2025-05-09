@@ -6,15 +6,15 @@
           <c-card class="p-4">
             <c-card-body>
               <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
-                <h1>Login</h1>
-                <p class="text-body-secondary">Sign In to your account</p>
+                <h1>{{ 'LOGIN.LOGIN' | translate }}</h1>
+                <p class="text-body-secondary">{{ 'LOGIN.SIGN_IN_YOUR_ACCOUNT' | translate }}</p>
                 <c-input-group class="mb-3">
                   <span cInputGroupText>
                     <svg cIcon name="cilUser"></svg>
                   </span>
                   <input autoComplete="username" cFormControl formControlName="username" placeholder="Username" [ngClass]="{'is-invalid': isInvalid('username')}" />
                   <div class="invalid-feedback" *ngIf="isInvalid('username')">
-                    Vui lòng nhập tên đăng nhập
+                    {{ 'LOGIN.REQUIRED_USERNAME' | translate }}
                   </div>
                 </c-input-group>
                 <c-input-group class="mb-4">
@@ -24,10 +24,10 @@
                   <input autoComplete="current-password" cFormControl formControlName="password" placeholder="Password"
                     type="password" [ngClass]="{'is-invalid': isInvalid('password')}" [type]="showPassword ? 'text' : 'password'"/>
                     <button type="button" cInputGroupText (click)="showPassword = !showPassword">
-                      <svg cIcon [attr.name]="showPassword ? 'cilEyeSlash' : 'cilEye'"></svg>
+                      <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                     </button>
                     <div class="invalid-feedback" *ngIf="isInvalid('password')">
-                      Vui lòng nhập mật khẩu
+                      {{ 'LOGIN.REQUIRED_PASSWORD' | translate }}
                     </div>
                 </c-input-group>
                 <c-row>
@@ -36,11 +36,11 @@
                       Đăng nhập
                     </button>
                   </c-col>
-                  <c-col class="text-right" xs="6">
+                  <!-- <c-col class="text-right" xs="6">
                     <button cButton class="px-0" color="link">
                       Vui lòng nhập mật khẩu?
                     </button>
-                  </c-col>
+                  </c-col> -->
                 </c-row>
               </form>
             </c-card-body>

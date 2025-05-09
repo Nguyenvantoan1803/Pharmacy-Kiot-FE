@@ -1,4 +1,11 @@
 {
-    "HELLO": "Hello",
-    "LANGUAGE": "Language"
+    "LOGIN": {
+    "REQUIRED_USERNAME": "Please enter Username",
+    "REQUIRED_PASSWORD": "Please enter PassWord"
+  },
+  "STANDARD":{
+    "STANDARDINFORMATION":"Standard Information",
+    "SYSTEMMANAGEMENT":"System Management",
+    "REGISTERUSER":"Users"
   }
+}

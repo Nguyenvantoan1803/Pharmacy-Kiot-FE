@@ -1,0 +1,22 @@
+/* Đảm bảo phần tử chứa dropdown có position relative */
+.dropdown-container {
+    position: relative;
+    display: inline-block; /* Nếu bạn muốn dropdown xuất hiện bên cạnh phần tử */
+  }
+  
+  /* Dropdown của bạn */
+  .showLangDropdown {
+    position: absolute; /* Dropdown sẽ xuất hiện dưới phần tử chứa */
+    top: 100%; /* Đặt dropdown ngay dưới phần tử */
+    left: 0;
+    z-index: 1000; /* Đảm bảo dropdown không bị đè lên bởi các phần tử khác */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Ban đầu dropdown ẩn đi */
+  }
+  
+  /* Nếu dropdown đang hiển thị */
+  .showLangDropdown.show {
+    display: block; /* Hiển thị dropdown */
+  }

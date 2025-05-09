@@ -96,7 +96,7 @@ import {
   cilUserUnfollow,
   cilCash,
   cilHistory,
-  
+
 } from '@coreui/icons';
 
 import { signet } from './signet';

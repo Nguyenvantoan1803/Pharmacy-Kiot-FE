@@ -38,7 +38,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+               "node_modules/bootstrap-icons/font/bootstrap-icons.css"
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [],
@@ -75,6 +76,9 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 2025
+          },
           "configurations": {
             "production": {
               "buildTarget": "coreui-free-angular-admin-template:build:production"
