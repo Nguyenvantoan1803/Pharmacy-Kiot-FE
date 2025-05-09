@@ -13,6 +13,7 @@ import { INavData } from '@coreui/angular';
 import { ChangeDetectorRef } from '@angular/core';
 import { LangChangeEvent } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
+import { navItems } from '../assets/menu/menu'; 
 @Component({
     selector: 'app-root',
     template: '<router-outlet />',
@@ -68,26 +69,30 @@ export class AppComponent implements OnInit {
       )
       .subscribe();
   }
+  // async loadMenu() {
+  //   this.menuItems = navItems;
+  //   for (const item of this.menuItems) {
+  //     await this.translateMenuItem(item);
+  //   }
+  // }
   loadMenu() {
-    const lang = this.translate.currentLang || this.translate.getDefaultLang();
-    console.log(lang, 'langlang');
-    
-    this.http.get<any>(`assets/menu/language/${lang}.json`)
+    const lang = 'vi'; // Ngôn ngữ là vi (Vietnamese)
+    this.http.get<Record<string, string>>(`assets/menu/language/i18n/${lang}.json`)
       .subscribe({
-        next: (data) => {
-          // Kiểm tra xem dữ liệu có phải là đối tượng không
+        next: async (data) => {
           if (data && typeof data === 'object') {
-            // Chuyển đối tượng thành mảng (lấy giá trị từ các khóa của đối tượng)
-            this.menuItems = Object.values(data);
-            
-            // Dịch từng item trong menu
-            this.menuItems.forEach(async item => {
+            // Chuyển object thành mảng INavData[]
+            this.menuItems = Object.keys(data).map(key => ({
+              name: data[key], // Tên hiển thị
+              translate: key,   // Từ khóa dịch
+            }));
+
+            // Dịch menu sau khi chuyển đổi
+            for (const item of this.menuItems) {
               await this.translateMenuItem(item);
-            });
-            
-            console.log('Menu loaded:', this.menuItems); // Kiểm tra thử
+            }
           } else {
-            console.error('Dữ liệu không phải là đối tượng hợp lệ:', data);
+            console.error('Dữ liệu menu không hợp lệ:', data);
           }
         },
         error: (error) => {
@@ -95,22 +100,14 @@ export class AppComponent implements OnInit {
         }
       });
   }
+
   
-  async translateMenuItem(item: INavData) {
+  async translateMenuItem(item: INavData): Promise<void> {
+    console.log(item, '67676767');
     if (item.translate) {
-      // Dịch tên menu nếu có khóa dịch
-      item.name = await firstValueFrom(this.translate.get(item.translate));
-    }
-    if (Array.isArray(item.children)) {
-      for (const child of item.children) {
-        if (child.translate) {
-          // Dịch tên mục con nếu có khóa dịch
-          child.name = await firstValueFrom(this.translate.get(child.translate));
-        }
-      }
+      item.name = await firstValueFrom(this.translate.get(item.translate)); // Dịch bằng ngx-translate
     }
   }
-  
   
   
 }
