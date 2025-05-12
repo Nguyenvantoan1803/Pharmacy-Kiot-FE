@@ -23,6 +23,7 @@ import {
 } from '@coreui/angular';
 import { IconDirective } from '@coreui/icons-angular';
 import { TranslateModule,TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../../@core/services/language.service'; 
 @Component({
     standalone: true,
     selector: 'app-default-header',
@@ -45,7 +46,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     return this.colorModes.find(mode => mode.name === currentMode)?.icon ?? 'cilSun';
   });
 
-  constructor(private translate: TranslateService) {
+  constructor(private translate: TranslateService,private languageService: LanguageService) {
     translate.setDefaultLang('en');
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang && browserLang.match(/en|vi/) ? browserLang : 'vi');
@@ -57,6 +58,7 @@ export class DefaultHeaderComponent extends HeaderComponent {
     this.currentLanguage = lang;
     this.showLangDropdown = false;
     this.translate.use(lang);
+    this.languageService.changeLanguage(lang);  // Gọi service để thay đổi ngôn ngữ
   }
   public newMessages = [
     {

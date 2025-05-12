@@ -22,6 +22,11 @@ export const navItems: INavData[] = [
             translate:'MENU.STANDARD.ROLEUSER',
             url: '/123',
             icon: 'nav-icon-bullet'
+          },
+          {
+            translate:'MENU.STANDARD.ROLEUSER',
+            url: '/123',
+            icon: 'nav-icon-bullet'
           }
         ]
       },

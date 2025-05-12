@@ -17,6 +17,8 @@ import {
 
 import { DefaultFooterComponent, DefaultHeaderComponent } from './';
 import { navItems } from '../../../assets/menu/menu';
+import { cilFace } from '@coreui/icons';
+import { CoreMenuService } from '../../../@core/services/core-menu.service'; // đường dẫn tùy theo dự án bạn
 
 function isOverflown(element: HTMLElement) {
   return (
@@ -47,5 +49,14 @@ function isOverflown(element: HTMLElement) {
   ]
 })
 export class DefaultLayoutComponent {
-  public navItems = [...navItems];
+  public navItems: any[] = [];
+
+  constructor(private _coreMenuService: CoreMenuService) {}
+
+  ngOnInit(): void {
+    this._coreMenuService.currentMenu$.subscribe(menu => {
+      this.navItems = menu || [];
+      console.log('navItems updated:', this.navItems);
+    });
+  }
 }

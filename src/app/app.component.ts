@@ -22,15 +22,20 @@ import { CoreMenuService } from '../@core/services/core-menu.service';
 import { navItems } from '../assets/menu/menu';
 import { locale as menuVietnamese } from '../assets/menu/language/i18n/vi'; 
 import { locale as menuEnglish } from '../assets/menu/language/i18n/en'; 
+//import { SidebarComponent } from '../app/layout/sidebar/sidebar.component';
+import { LanguageService } from '../@core/services/language.service'; 
+
 @Component({
   selector: 'app-root',
-  template: '<router-outlet />',
+  template: `<router-outlet/>`,
   imports: [RouterOutlet, TranslateModule],
   providers: [TranslateService],
 })
 export class AppComponent implements OnInit {
   title = 'Pharmacy-Kiot';
   menuItems: any;
+  languageInitialized: boolean = false;
+
   readonly #destroyRef: DestroyRef = inject(DestroyRef);
   readonly #activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   readonly #router = inject(Router);
@@ -44,38 +49,29 @@ export class AppComponent implements OnInit {
     private http: HttpClient,
     private cdr: ChangeDetectorRef,
     private _coreTranslationService: CoreTranslationService,
-    private _coreMenuService: CoreMenuService
+    private _coreMenuService: CoreMenuService,
+    private languageService: LanguageService
   ) {
     this.menuItems = navItems;
-
+    _translate.setDefaultLang('vi');
+    _translate.use('vi');
     //this._coreMenuService.setCurrentMenu('main');
     this.#titleService.setTitle(this.title);
-
     // iconSet singleton
     this.#iconSetService.icons = { ...iconSubset };
     this.#colorModeService.localStorageItemName.set(
       'coreui-free-angular-admin-template-theme-default'
     );
     this.#colorModeService.eventName.set('ColorSchemeChange');
+    this._translate.addLangs(['vi', 'en']);
+    let languageLocal = localStorage.getItem('language') || 'vi'; // Check if language exists in localStorage
+    console.log(languageLocal, 'languageLocal value');
 
-    this._translate.addLangs(['vn', 'en']);
-
-    let languageLocal = localStorage.getItem('language') || 'vn'; // Check if language exists in localStorage
-    // localStorage.setItem('language', languageLocal); // Ensure language is set in localStorage
-
-    // this._coreTranslationService.translate(menuEnglish,menuVietnamese);
-     this._translate.setDefaultLang(languageLocal);
-    // this._translate.use(languageLocal);
-    // Đảm bảo sử dụng đúng ngôn ngữ và thực hiện dịch menu
-    // const translatedMenu = this.translateMenuItems(navItems);
-    // this._coreMenuService.register('main', translatedMenu);
-    // this._coreMenuService.setCurrentMenu('main');
-    console.log(languageLocal,'languageLocal');
-    console.log(this._translate.currentLang,'this._translate.currentLang');
-    if (languageLocal !== this._translate.currentLang) {  // Kiểm tra nếu ngôn ngữ chưa thay đổi
-      localStorage.setItem('language', languageLocal);
+    this._translate.setDefaultLang(languageLocal);
+    if (languageLocal === this._translate.currentLang && !this.languageInitialized) {
+      this.languageInitialized = true;
       this._coreTranslationService.translate(menuEnglish, menuVietnamese);
-      this._translate.setDefaultLang(languageLocal);
+      this._translate.setDefaultLang(languageLocal); 
       this._translate.use(languageLocal).subscribe(() => {
         const translatedMenu = this.translateMenuItems(navItems);
         this._coreMenuService.register('main', translatedMenu);
@@ -85,10 +81,15 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.loadMenu();
-    // this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-    //   this.loadMenu(); // khi đổi ngôn ngữ → load lại menu và dịch
-    // });
+    this.languageService.currentLanguage$.subscribe(language => {
+      this._coreTranslationService.translate(menuEnglish, menuVietnamese);
+      this._translate.use(language).subscribe(() => {
+        const translatedMenu = this.translateMenuItems(navItems);
+        this._coreMenuService.register('main', translatedMenu);
+        this._coreMenuService.setCurrentMenu('main');
+      });
+    });
+  
     this.#router.events
       .pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((evt) => {
@@ -108,6 +109,7 @@ export class AppComponent implements OnInit {
         takeUntilDestroyed(this.#destroyRef)
       )
       .subscribe();
+      
   }
   private translateMenuItems(menuItems: INavData[]): INavData[] {
     const translated =  menuItems.map(item => {
@@ -115,15 +117,15 @@ export class AppComponent implements OnInit {
         ...item,
         name: this._translate.instant(item.translate || '')
       };
+      console.log(translatedItem)
       if (item.children && item.children.length) {
         translatedItem.children = this.translateMenuItems(item.children);
       }
       return translatedItem;
     });
-    console.log(translated,'translated');
     return translated;
   }
 }
-// export function HttpLoaderFactory(http: HttpClient) {
-//   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-// }
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
