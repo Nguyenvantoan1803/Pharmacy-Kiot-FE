@@ -3,11 +3,11 @@ export const locale = {
     data: {
       MENU:{
         STANDARD:{
-            STANDARD:"STANDARD",
-            STANDARDINFORMATION: "STANDARD INFORMATION",
-            SYSTEMMANAGEMENT: "SYSTEM MANAGEMENT",
-            REGISTERUSER: "REGISTER USER",
-            ROLEUSER: "ROLE USER"
+            STANDARD:"Standard",
+            STANDARDINFORMATION: "Standard Information",
+            SYSTEMMANAGEMENT: "System Management",
+            REGISTERUSER: "Regist User",
+            ROLEUSER: "Role User",
         }
       }
     }

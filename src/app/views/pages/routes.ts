@@ -20,5 +20,12 @@ export const routes: Routes = [
     data: {
       title: 'Register Page'
     }
-  }
+  },
+  // {
+  //   path: 'user',
+  //   loadComponent: () => import('../../../components/standard/standard-infomation/standard-user/standard-user.component').then(m => m.StandardUserComponent),
+  //   data: {
+  //     title: 'Register Page'
+  //   }
+  // }
 ];

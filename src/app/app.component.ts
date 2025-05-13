@@ -63,10 +63,9 @@ export class AppComponent implements OnInit {
       'coreui-free-angular-admin-template-theme-default'
     );
     this.#colorModeService.eventName.set('ColorSchemeChange');
+    //Thay đổi ngôn ngữ
     this._translate.addLangs(['vi', 'en']);
     let languageLocal = localStorage.getItem('language') || 'vi'; // Check if language exists in localStorage
-    console.log(languageLocal, 'languageLocal value');
-
     this._translate.setDefaultLang(languageLocal);
     if (languageLocal === this._translate.currentLang && !this.languageInitialized) {
       this.languageInitialized = true;
@@ -81,6 +80,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Thay đổi ngôn ngữ
     this.languageService.currentLanguage$.subscribe(language => {
       this._coreTranslationService.translate(menuEnglish, menuVietnamese);
       this._translate.use(language).subscribe(() => {
@@ -117,7 +117,6 @@ export class AppComponent implements OnInit {
         ...item,
         name: this._translate.instant(item.translate || '')
       };
-      console.log(translatedItem)
       if (item.children && item.children.length) {
         translatedItem.children = this.translateMenuItems(item.children);
       }
