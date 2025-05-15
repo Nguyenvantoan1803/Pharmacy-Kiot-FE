@@ -11,15 +11,16 @@ const routes: Routes = [
 ]
 @NgModule({
   declarations: [
-    StandardUserComponent,
+    
     
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    
   ],
   exports: [
-    StandardUserComponent,
+    
   ]
 })
 export class StandardInfomationModule {}

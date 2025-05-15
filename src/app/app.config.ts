@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
       }),
       withEnabledBlockingInitialNavigation(),
       withViewTransitions(),
-      withHashLocation()
+      //withHashLocation()//dẫn đến # trên
     ),
     importProvidersFrom(SidebarModule, DropdownModule),
     IconSetService,

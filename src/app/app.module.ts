@@ -31,6 +31,7 @@ const appRoutes: Routes = [
     }),
     RouterModule.forRoot(appRoutes, {
       scrollPositionRestoration: "enabled", 
+      useHash: false 
     }),
   ],
   providers: [],

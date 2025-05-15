@@ -18,30 +18,19 @@ export const routes: Routes = [
         loadChildren: () => import('./views/dashboard/routes').then((m) => m.routes)
       },
       {
-        path: 'theme',
-        loadChildren: () => import('./views/theme/routes').then((m) => m.routes)
-      },
-      {
-        path: 'base',
-        loadChildren: () => import('./views/base/routes').then((m) => m.routes)
-      },
-      {
-        path: 'charts',
-        loadChildren: () => import('./views/charts/routes').then((m) => m.routes)
-      },
-      {
-        path: 'pages',
-        loadChildren: () => import('./views/pages/routes').then((m) => m.routes)
+        path: 'standard',
+        loadChildren: () =>
+          import('../components/standard/standard.module').then(m => m.StandardModule),
       }
     ]
   },
-  {
-    path: '500',
-    loadComponent: () => import('./views/pages/page500/page500.component').then(m => m.Page500Component),
-    data: {
-      title: 'Page 500'
-    }
-  },
+  // {
+  //   path: '500',
+  //   loadComponent: () => import('./views/pages/page500/page500.component').then(m => m.Page500Component),
+  //   data: {
+  //     title: 'Page 500'
+  //   }
+  // },
   {
     path: 'login',
     loadComponent: () => import('./views/pages/login/login.component').then(m => m.LoginComponent),
@@ -49,12 +38,5 @@ export const routes: Routes = [
       title: 'Login Page'
     }
   },
-  {
-    path: 'register',
-    loadComponent: () => import('./views/pages/register/register.component').then(m => m.RegisterComponent),
-    data: {
-      title: 'Register Page'
-    }
-  },
-  { path: '**', redirectTo: 'dashboard' }
+  // { path: '**', redirectTo: 'dashboard' }
 ];
