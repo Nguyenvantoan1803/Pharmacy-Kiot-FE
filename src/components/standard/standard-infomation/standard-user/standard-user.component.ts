@@ -20,10 +20,10 @@ export class StandardUserComponent {
   }
 
   generateFakeData() {
-    this.listInventory = Array.from({ length: 10 }).map((_, i) => ({
+    this.listInventory = Array.from({ length: 11 }).map((_, i) => ({
       id: i + 1,
       name: `Sản phẩm ${i + 1}`,
-      quantity: Math.floor(Math.random() * 10),
+      quantity: Math.floor(Math.random() * 11),
       date: new Date(2023, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28) + 1).toISOString().slice(0, 10)
     }));
     this.totalCount = this.listInventory.length;

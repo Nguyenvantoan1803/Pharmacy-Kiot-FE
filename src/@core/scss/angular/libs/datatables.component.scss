@@ -1,8 +1,12 @@
-@import '@swimlane/ngx-datatable/index.css';
+// @import '~@swimlane/ngx-datatable/index.css';
+// @import '../../../../../node_modules/swimlane/ngx-datatable/index.css';
 @import '@swimlane/ngx-datatable/themes/bootstrap.scss';
-@import '@swimlane/ngx-datatable/assets/icons.css';
-//@import '../../base/colors.scss';
-@import '../../base/components/include'; // Components includes
+// @import '@swimlane/ngx-datatable/assets/icons.css';
+// @import '../../../../../node_modules/swimlane/ngx-datatable/assets/icons.css';
+// @import '@core/scss/base/colors.scss';
+@import '../../../scss/base/colors.scss';
+// @import '@code/scss/base/components/include'; // Components includes
+@import '../../base/components/include';
 $table-head-bg: #f4f6f9 !default;
 $gray-400: #cbd5e0 !default; 
 $pagination-bg: #f8f9fa !default;
