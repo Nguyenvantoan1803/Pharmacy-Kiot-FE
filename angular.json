@@ -49,6 +49,9 @@
               "sass": {
                 "silenceDeprecations": []
               }
+              ,"includePaths": [
+                "src/@core/scss"
+              ]
             }
           },
           "configurations": {

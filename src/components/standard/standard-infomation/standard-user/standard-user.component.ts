@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
-import { ColumnMode } from '@swimlane/ngx-datatable';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { SelectionType } from '@swimlane/ngx-datatable';
 import { CommonModule } from '@angular/common';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 @Component({
   selector: 'app-standard-user',
-  imports: [NgxDatatableModule,CommonModule],
+  imports: [CommonModule,NgxDatatableModule],
   templateUrl: './standard-user.component.html',
-  styleUrl: './standard-user.component.scss'
+  styleUrls: ["./standard-user.component.scss"]
 })
 export class StandardUserComponent {
-  SelectionType = SelectionType;
   ColumnMode = ColumnMode;
   listInventory: any[] = [];
   listSelected: any[] = [];

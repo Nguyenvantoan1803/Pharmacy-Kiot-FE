@@ -1,4 +1,1 @@
-::ng-deep .ngx-datatable .datatable-header-cell.gray-header {
-    background-color: #e0e0e0; /* Màu xám hơn một chút */
-    color: #444;
-  }
+@import "../../../../@core/scss/angular/libs/datatables.component.scss";
